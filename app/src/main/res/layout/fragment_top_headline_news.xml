@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".topHeadlineNewsFragment"
+    tools:context=".ui.fragments.topHeadlineNewsFragment"
     android:background="@color/background"
     android:id="@+id/refresh_top_headline_news"
     android:animateLayoutChanges="true"
