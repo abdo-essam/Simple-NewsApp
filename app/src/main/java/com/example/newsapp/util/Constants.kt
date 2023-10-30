@@ -5,4 +5,7 @@ object Constants {
 
     const val DATABASE_NAME = "articles_db"
     const val SORT_BY_POPULARITY = "popularity"
+    const val COUNTRY_CODE = "countryCode"
+    const val TOP_HEADLINE_ARTICLES = "topHeadlineArticles"
+    const val CATEGORY_ARTICLES = "categoryArticles"
 }
