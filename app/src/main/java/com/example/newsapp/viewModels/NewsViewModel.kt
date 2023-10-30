@@ -48,7 +48,6 @@ class NewsViewModel @Inject constructor(
       the featuredArticle variable will be null when the app is run for the first time,
       because there are no articles stored in the database.
     */
-
     private fun getFeaturedArticle() = viewModelScope.launch {
         val featuredArticle = articlesRepository.getRandomArticle()
         Log.d("randomArticle", featuredArticle.toString())

@@ -2,6 +2,10 @@ package com.example.newsapp.di.modules
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import com.example.newsapp.R
 import com.example.newsapp.data.database.ArticlesDatabase
 import com.example.newsapp.data.networking.NewsApi
 import com.example.newsapp.helper.ArticlesCache
@@ -59,6 +63,17 @@ object AppModule {
     ) = context.getSharedPreferences(COUNTRY_CODE, MODE_PRIVATE).getString(COUNTRY_CODE, "eg")
         ?: "eg"
 
+
+    @Provides
+    @Singleton
+    fun provideGlide(
+        @ApplicationContext context: Context
+    ) = Glide.with(context).applyDefaultRequestOptions(
+        RequestOptions()
+            .placeholder(R.drawable.loading)
+            .error(R.drawable.news)
+            .diskCacheStrategy(DiskCacheStrategy.DATA)
+    )
 
 
 

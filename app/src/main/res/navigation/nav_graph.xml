@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/topHeadlineNewsFragment"
-        android:name="com.example.newsapp.ui.fragments.topHeadlineNewsFragment"
+        android:name="com.example.newsapp.ui.fragments.TopHeadlineNewsFragment"
         android:label="fragment_top_headline_news"
         tools:layout="@layout/fragment_top_headline_news" />
 </navigation>
