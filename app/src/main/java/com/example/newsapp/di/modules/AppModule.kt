@@ -9,6 +9,7 @@ import com.example.newsapp.R
 import com.example.newsapp.data.database.ArticlesDatabase
 import com.example.newsapp.data.networking.NewsApi
 import com.example.newsapp.helper.ArticlesCache
+import com.example.newsapp.helper.Navigation
 import com.example.newsapp.repositories.ArticlesRepository
 import com.example.newsapp.util.Constants.BASE_URL
 import com.example.newsapp.util.Constants.COUNTRY_CODE
@@ -74,6 +75,10 @@ object AppModule {
             .error(R.drawable.news)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
     )
+
+    @Provides
+    @Singleton
+    fun provideNavigation() = Navigation()
 
 
 

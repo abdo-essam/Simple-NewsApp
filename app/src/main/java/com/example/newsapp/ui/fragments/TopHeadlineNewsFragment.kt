@@ -8,12 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.RequestManager
+import com.example.newsapp.R
 import com.example.newsapp.adapters.ArticlesAdapter
 import com.example.newsapp.adapters.CategoriesAdapter
 import com.example.newsapp.data.model.Article
 import com.example.newsapp.databinding.FragmentTopHeadlineNewsBinding
+import com.example.newsapp.helper.Navigation
 import com.example.newsapp.helper.ResourceResultHandler
 import com.example.newsapp.helper.VerticalRecyclerViewDecoration
 import com.example.newsapp.util.Constants.BUSINESS
@@ -32,7 +35,8 @@ class TopHeadlineNewsFragment : Fragment() {
     @Inject
     lateinit var glide: RequestManager
 
-
+    @Inject
+    lateinit var navigation: Navigation
     private val viewModel by activityViewModels<NewsViewModel>()
 
     private lateinit var binding: FragmentTopHeadlineNewsBinding
@@ -87,6 +91,19 @@ class TopHeadlineNewsFragment : Fragment() {
             setupFeaturedArticle(featuredArticleResult)
             featuredArticle = featuredArticleResult
 
+        }
+
+        binding.imgFeaturedArticle.setOnClickListener {
+            //Simulate a random number for the reading time based on content
+            val readingTime = featuredArticle?.content?.length?.div(70)
+            val time =
+                "$readingTime ${requireContext().getString(R.string.read_time)} | ${featuredArticle?.publishedAt}"
+           navigation.navigateTo(
+                findNavController(),
+                R.id.action_topHeadlineNewsFragment_to_articleFragment,
+                featuredArticle,
+                time
+            )
         }
 
     }

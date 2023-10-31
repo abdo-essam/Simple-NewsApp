@@ -9,5 +9,21 @@
         android:id="@+id/topHeadlineNewsFragment"
         android:name="com.example.newsapp.ui.fragments.TopHeadlineNewsFragment"
         android:label="fragment_top_headline_news"
-        tools:layout="@layout/fragment_top_headline_news" />
+        tools:layout="@layout/fragment_top_headline_news" >
+        <action
+            android:id="@+id/action_topHeadlineNewsFragment_to_articleFragment"
+            app:destination="@id/articleFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/articleFragment"
+        android:name="com.example.newsapp.ui.fragments.ArticleFragment"
+        android:label="fragment_article"
+        tools:layout="@layout/fragment_article" >
+        <argument
+            android:name="article"
+            app:argType="com.example.newsapp.data.model.Article" />
+        <argument
+            android:name="time"
+            app:argType="string" />
+    </fragment>
 </navigation>
