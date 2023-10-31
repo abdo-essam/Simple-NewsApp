@@ -11,8 +11,11 @@
 
     <color name="background">#EEF0F9</color>
     <color name="bold_text_color">#26325B</color>
-    <color name="orange">#FFA200</color>
     <color name="content_text">#858EAC</color>
     <color name="line_color">#22858EAC</color>
+    <color name="orange">#FFA200</color>
+    <color name="red">#FF5500</color>
+    <color name="blue">#2D5FFF</color>
+    <color name="green">#4DC62B</color>
 
 </resources>

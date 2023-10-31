@@ -8,4 +8,8 @@ object Constants {
     const val COUNTRY_CODE = "countryCode"
     const val TOP_HEADLINE_ARTICLES = "topHeadlineArticles"
     const val CATEGORY_ARTICLES = "categoryArticles"
+    const val ENTERTAINMENT = "entertainment"
+    const val BUSINESS = "business"
+    const val SINCE = "science"
+    const val SPORTS = "sports"
 }

@@ -11,10 +11,15 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.RequestManager
 import com.example.newsapp.adapters.ArticlesAdapter
+import com.example.newsapp.adapters.CategoriesAdapter
 import com.example.newsapp.data.model.Article
 import com.example.newsapp.databinding.FragmentTopHeadlineNewsBinding
 import com.example.newsapp.helper.ResourceResultHandler
 import com.example.newsapp.helper.VerticalRecyclerViewDecoration
+import com.example.newsapp.util.Constants.BUSINESS
+import com.example.newsapp.util.Constants.ENTERTAINMENT
+import com.example.newsapp.util.Constants.SINCE
+import com.example.newsapp.util.Constants.SPORTS
 import com.example.newsapp.viewModels.NewsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -33,6 +38,7 @@ class TopHeadlineNewsFragment : Fragment() {
     private lateinit var binding: FragmentTopHeadlineNewsBinding
     private lateinit var topHeadlinesProgressHandler: ResourceResultHandler
     private lateinit var articlesAdapter: ArticlesAdapter
+    private lateinit var categoriesAdapter: CategoriesAdapter
 
 
     override fun onCreateView(
@@ -48,6 +54,7 @@ class TopHeadlineNewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupCategoriesRecyclerview()
         setupArticlesRecyclerview()
 
         topHeadlinesProgressHandler = ResourceResultHandler(
@@ -83,32 +90,51 @@ class TopHeadlineNewsFragment : Fragment() {
         }
 
     }
-        private fun hidePagingLoading() {
-            binding.progressbarHeadlineNewsPaging.visibility = View.GONE
-            binding.refreshTopHeadlineNews.isRefreshing = false
-        }
 
-        private fun setupFeaturedArticle(featuredArticle: Article) {
-            glide.load(featuredArticle.urlToImage).into(binding.imgFeaturedArticle)
-            binding.tvFeaturedArticleTitle.text = featuredArticle.title
-        }
-
-        private fun hideLoading() {
-            binding.progressbar.visibility = View.INVISIBLE
-            binding.refreshTopHeadlineNews.isRefreshing = false
-        }
-
-        private fun showLoading() {
-            binding.progressbar.visibility = View.VISIBLE
-        }
-
-        private fun setupArticlesRecyclerview() {
-            articlesAdapter = ArticlesAdapter()
-            binding.rvTopHeadlines.apply {
-                layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-                adapter = articlesAdapter
-                addItemDecoration(VerticalRecyclerViewDecoration(60))
-            }
-        }
-
+    private fun hidePagingLoading() {
+        binding.progressbarHeadlineNewsPaging.visibility = View.GONE
+        binding.refreshTopHeadlineNews.isRefreshing = false
     }
+
+    private fun setupFeaturedArticle(featuredArticle: Article) {
+        glide.load(featuredArticle.urlToImage).into(binding.imgFeaturedArticle)
+        binding.tvFeaturedArticleTitle.text = featuredArticle.title
+    }
+
+    private fun hideLoading() {
+        binding.progressbar.visibility = View.INVISIBLE
+        binding.refreshTopHeadlineNews.isRefreshing = false
+    }
+
+    private fun showLoading() {
+        binding.progressbar.visibility = View.VISIBLE
+    }
+
+    private fun setupArticlesRecyclerview() {
+        articlesAdapter = ArticlesAdapter()
+        binding.rvTopHeadlines.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            adapter = articlesAdapter
+            addItemDecoration(VerticalRecyclerViewDecoration(60))
+        }
+    }
+
+    private fun setupCategoriesRecyclerview() {
+        categoriesAdapter = CategoriesAdapter()
+        binding.rvCategories.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            adapter = categoriesAdapter
+        }
+        val categoriesList = getCategoriesList()
+        categoriesAdapter.setCategoriesList(categoriesList)
+    }
+    private fun getCategoriesList(): MutableList<String> {
+        return mutableListOf(
+            ENTERTAINMENT,
+            BUSINESS,
+            SINCE,
+            SPORTS
+        )
+    }
+
+}
